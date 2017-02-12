@@ -17,15 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let trigs = Triggers()
+        let imageStore = ImageStore()
         
-        let tabController = window!.rootViewController as! UITabBarController
-        /*let navCntr = tabController.childViewControllers[1] as! UINavigationController
-        let tableCntrl = navCntr.topViewController as! TriggerTableViewController
-        tableCntrl.triggers = trigs*/
-        
-        /*let main = tabController.childViewControllers[0] as! MainDataViewController
-        main.triggers = trigs*/
+        let tabCntrl = window?.rootViewController! as! UITabBarController
+        let navCntrl = tabCntrl.viewControllers?[2] as! UINavigationController
+        let medViewCntrl = navCntrl.topViewController as! MedsTableViewController
+        medViewCntrl.imageStore = imageStore
         
         return true
     }

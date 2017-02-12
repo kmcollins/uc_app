@@ -15,6 +15,8 @@ class MedsTableViewController: UITableViewController {
     
     var meds: [Medication] = []
     
+    var imageStore: ImageStore!
+    
     @IBAction func addNewMedication(_ sender: AnyObject) {
         
         let alert = UIAlertController(title: "New Medication", message: "Add a medication.", preferredStyle: .alert)
@@ -25,7 +27,6 @@ class MedsTableViewController: UITableViewController {
             let frequencyTextField = alert.textFields![2]
             let appearanceTextField = alert.textFields![3]
             self.createMedication(withName: nameTextField.text!, withDose: doseTextField.text!, withFreq: frequencyTextField.text!, withAppearance: appearanceTextField.text!)*/
-            print("nameTextField.text!")
             self.createMedication(withName: nameTextField.text!, withDose: "0", withFreq: "0", withAppearance: "")
             self.tableView.reloadData()
         }
@@ -51,6 +52,8 @@ class MedsTableViewController: UITableViewController {
         med.dailyFreq = Int32(freq)!
         med.dosage = Double(dose)!
         
+        med.imageKey = UUID().uuidString
+        
         appDelegate.saveContext()
         
         updateMedsArray()
@@ -71,6 +74,7 @@ class MedsTableViewController: UITableViewController {
         catch {
             print("ERROR")
         }
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -79,7 +83,7 @@ class MedsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "defaultCell", for: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "defaultMedCell", for: indexPath) as! UITableViewCell
         
         /* Set the text on the cell w/ the description of the item
          that is at the nth index of items, where n = row this cell
@@ -113,6 +117,8 @@ class MedsTableViewController: UITableViewController {
                                                 let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
                                                 let context = appDelegate.persistentContainer.viewContext
                                                 
+                                                self.imageStore.deleteImageForKey(key: medication.imageKey!)
+                                                
                                                 context.delete(medication)
                                                 appDelegate.saveContext()
                                                 
@@ -143,11 +149,13 @@ class MedsTableViewController: UITableViewController {
                 // let name = triggers.triggerNames[row]
                 let med = meds[row]
                 let detailViewController = segue.destination as! DetailMedViewController
+                detailViewController.med = med
                 detailViewController.medName = med.name
-                detailViewController.appearance = med.appearance
+                detailViewController.imageStore = imageStore
+                /*detailViewController.appearance = med.appearance
                 detailViewController.medDose = med.dosage
                 detailViewController.medFreq = med.dailyFreq
-                detailViewController.medIndex = row
+                detailViewController.medIndex = row*/
             }
         }
     }
@@ -162,6 +170,7 @@ class MedsTableViewController: UITableViewController {
         let context = appDelegate.persistentContainer.viewContext
         
         do {
+            //self.meds.removeAll()
             self.meds = try context.fetch(Medication.fetchRequest()) as! [Medication]
         }
         catch {
@@ -171,6 +180,7 @@ class MedsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateMedsArray()
         tableView.reloadData()
     }
     

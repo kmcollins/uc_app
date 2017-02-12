@@ -15,12 +15,14 @@
 		840A79A11E3FBB5500B0A3FA /* TriggerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A79A01E3FBB5500B0A3FA /* TriggerTableViewController.swift */; };
 		840A79A31E3FBCFF00B0A3FA /* Triggers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A79A21E3FBCFF00B0A3FA /* Triggers.swift */; };
 		840A79A51E3FD5E200B0A3FA /* TriggerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A79A41E3FD5E200B0A3FA /* TriggerCell.swift */; };
+		844BECA01E4C02A90008E537 /* redcross.png in Resources */ = {isa = PBXBuildFile; fileRef = 844BEC9F1E4C02A90008E537 /* redcross.png */; };
 		8497730B1E3D7C4B00029FFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8497730A1E3D7C4B00029FFC /* AppDelegate.swift */; };
 		8497730D1E3D7C4B00029FFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8497730C1E3D7C4B00029FFC /* ViewController.swift */; };
 		849773101E3D7C4B00029FFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8497730E1E3D7C4B00029FFC /* Main.storyboard */; };
 		849773131E3D7C4B00029FFC /* UC_CoreData_Test.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 849773111E3D7C4B00029FFC /* UC_CoreData_Test.xcdatamodeld */; };
 		849773151E3D7C4B00029FFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849773141E3D7C4B00029FFC /* Assets.xcassets */; };
 		849773181E3D7C4B00029FFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849773161E3D7C4B00029FFC /* LaunchScreen.storyboard */; };
+		84AE57931E4E5F73007D8713 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE57921E4E5F73007D8713 /* ImageStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,7 @@
 		840A79A01E3FBB5500B0A3FA /* TriggerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerTableViewController.swift; sourceTree = "<group>"; };
 		840A79A21E3FBCFF00B0A3FA /* Triggers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Triggers.swift; path = ../Triggers.swift; sourceTree = "<group>"; };
 		840A79A41E3FD5E200B0A3FA /* TriggerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriggerCell.swift; sourceTree = "<group>"; };
+		844BEC9F1E4C02A90008E537 /* redcross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redcross.png; sourceTree = "<group>"; };
 		849773071E3D7C4B00029FFC /* UC_CoreData_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UC_CoreData_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8497730A1E3D7C4B00029FFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8497730C1E3D7C4B00029FFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +43,7 @@
 		849773141E3D7C4B00029FFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		849773171E3D7C4B00029FFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		849773191E3D7C4B00029FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84AE57921E4E5F73007D8713 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,8 @@
 				8497730E1E3D7C4B00029FFC /* Main.storyboard */,
 				84083C541E4399E900507710 /* MedsTableViewController.swift */,
 				84083C561E439C8900507710 /* DetailMedViewController.swift */,
+				84AE57921E4E5F73007D8713 /* ImageStore.swift */,
+				844BEC9F1E4C02A90008E537 /* redcross.png */,
 				8409B3A81E4148CA0023243F /* TodaysTriggersController.swift */,
 				840A79A41E3FD5E200B0A3FA /* TriggerCell.swift */,
 				840A79A01E3FBB5500B0A3FA /* TriggerTableViewController.swift */,
@@ -151,6 +157,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				844BECA01E4C02A90008E537 /* redcross.png in Resources */,
 				849773181E3D7C4B00029FFC /* LaunchScreen.storyboard in Resources */,
 				849773151E3D7C4B00029FFC /* Assets.xcassets in Resources */,
 				849773101E3D7C4B00029FFC /* Main.storyboard in Resources */,
@@ -175,6 +182,7 @@
 				84083C551E4399E900507710 /* MedsTableViewController.swift in Sources */,
 				8409B3A91E4148CA0023243F /* TodaysTriggersController.swift in Sources */,
 				84083C571E439C8900507710 /* DetailMedViewController.swift in Sources */,
+				84AE57931E4E5F73007D8713 /* ImageStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

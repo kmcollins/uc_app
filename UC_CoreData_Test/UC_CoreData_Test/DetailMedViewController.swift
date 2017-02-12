@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 import CoreData
 
-class DetailMedViewController: UIViewController, UITextFieldDelegate {
+class DetailMedViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    @IBOutlet var imageView: UIImageView!
     
     var medName: String! {
         didSet {
@@ -18,26 +20,17 @@ class DetailMedViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    var medDose: Double! {
-        didSet {
-            doseTF.text = String(medDose)
-        }
-    }
+    var imageStore: ImageStore!
     
-    var medFreq: Int32! {
-        didSet {
-            freqTF.text = String(medFreq)
-        }
-    }
+    var med: Medication!
     
-    var appearance: String! {
-        didSet {
-            appTF.text = appearance
-        }
-    }
+    var medDose: Double?
     
-    var medIndex: Int!
+    var medFreq: Int32?
     
+    var appearance: String?
+    
+    //var medIndex: Int!
     
     @IBOutlet var doseTF: UITextField!
     @IBOutlet var freqTF: UITextField!
@@ -47,40 +40,99 @@ class DetailMedViewController: UIViewController, UITextFieldDelegate {
         self.doseTF.delegate = self
         self.appTF.delegate = self
         self.freqTF.delegate = self
+        
+        self.appearance = self.med.appearance
+        self.medDose = self.med.dosage
+        self.medFreq = self.med.dailyFreq
+        
+        self.appTF.text = self.appearance!
+        self.doseTF.text = String(self.medDose!)
+        self.freqTF.text = String(self.medFreq!)
+        
+        let key = med.imageKey
+        
+        if let imageToDisplay = imageStore.imageForKey(key: key!) {
+            imageView.image = imageToDisplay
+        }
+    }
+    
+    @IBAction func saveMed(_ sender: Any) {
+        let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        context.delete(med)
+        appDelegate.saveContext()
+        
+        let newMed = Medication(context: context)
+        newMed.appearance = appTF.text!
+        if let newFreq = Int32(freqTF.text!) {
+            newMed.dailyFreq = newFreq
+        } else {
+            newMed.dailyFreq = 0
+        }
+        if let newDose = Double(doseTF.text!) {
+            newMed.dosage = newDose
+        } else {
+            newMed.dosage = 0.0
+        }
+        newMed.name = medName
+        appDelegate.saveContext()
+        med = newMed
+        print(med)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == doseTF {
-            saveDose(dose: textField.text!)
             doseTF.resignFirstResponder()
         }
         else if textField == freqTF {
-            saveFreq(freq: textField.text!)
             freqTF.resignFirstResponder()
         }
         else if textField == appTF {
-            saveAppearance(withDescription: textField.text!)
             appTF.resignFirstResponder()
         }
         return true
     }
     
-    func saveDose(dose: String) {
-        /*let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
+    @IBAction func takePicture(_ sender: UIBarButtonItem) {
+        let imagePicker = UIImagePickerController()
         
-        let medication =
+        print("made image picker")
         
-        context.delete(medication)
-        appDelegate.saveContext()*/
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            print("going to camera")
+            imagePicker.sourceType = .camera
+        } else {
+            print("going to photo library")
+            imagePicker.sourceType = .photoLibrary
+        }
+        
+        print("setting delegate")
+        
+        imagePicker.delegate = self
+        
+        print("about to present image picker")
+        
+        present(imagePicker, animated: true, completion: nil)
     }
     
-    func saveFreq(freq: String) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-    }
-    
-    func saveAppearance(withDescription apprc: String) {
+        print("in image picker")
         
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        print("took image")
+        
+        imageStore.setImage(image: image, forKey: med.imageKey!)
+        
+        print("setting image")
+        
+        imageView.image = image
+        
+        print("dismissing")
+        
+        dismiss(animated: true, completion: nil)
     }
     
 }
